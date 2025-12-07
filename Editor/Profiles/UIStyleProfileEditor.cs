@@ -155,12 +155,16 @@ namespace JanSharp
                 EditorGUILayout.PropertyField(profileNameProp);
             if (!isEditingMultipleObjects)
             {
-                if (profileNameProp.stringValue == "")
+                if (UIStylingEditorUtil.IsEmptyName(profileNameProp.stringValue))
                     using (new GUILayout.VerticalScope(EditorStyles.helpBox))
-                        GUILayout.Label("Profile name must not be empty.", EditorStyles.wordWrappedLabel);
-                else if (profileNameProp.stringValue.Trim().Length != profileNameProp.stringValue.Length)
+                        GUILayout.Label("Profile Name must not be empty.", EditorStyles.wordWrappedLabel);
+                else if (UIStylingEditorUtil.HasLeadingTrailingWhitespace(profileNameProp.stringValue))
                     using (new GUILayout.VerticalScope(EditorStyles.helpBox))
-                        GUILayout.Label("Profile name must not have leading nor trailing white space.",
+                        GUILayout.Label("Profile Name must not have leading nor trailing white space.",
+                            EditorStyles.wordWrappedLabel);
+                else if (!UIStyleProfileContainerUtil.IsProfileActive((UIStyleProfile)target))
+                    using (new GUILayout.VerticalScope(EditorStyles.helpBox))
+                        GUILayout.Label("Profile is inactive and will not be usable.",
                             EditorStyles.wordWrappedLabel);
                 else if (otherProfileNamesLut.Contains(profileNameProp.stringValue))
                     using (new GUILayout.VerticalScope(EditorStyles.helpBox))

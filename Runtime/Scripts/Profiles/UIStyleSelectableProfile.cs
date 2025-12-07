@@ -19,6 +19,7 @@ namespace JanSharp
         public string pressedSprite;
         public string selectedSprite;
         public string disabledSprite;
+        [Tooltip("Only Mode and Wrap Around are used.")]
         public Navigation navigation;
     }
 }

@@ -1,5 +1,8 @@
+using UnityEngine;
+
 namespace JanSharp
 {
+    [DisallowMultipleComponent]
     public class UIStyleSelectable : UIStyleApplier, VRC.SDKBase.IEditorOnly
     {
         public bool controlInteractable = false;
@@ -15,6 +18,7 @@ namespace JanSharp
         public bool controlPressedSprite = true;
         public bool controlSelectedSprite = true;
         public bool controlDisabledSprite = true;
+        [Tooltip("Only Mode and Wrap Around are used.")]
         public bool controlNavigation = true;
     }
 }

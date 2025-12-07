@@ -6,6 +6,26 @@ namespace JanSharp
     [CustomEditor(typeof(UIStyleSelectableProfile))]
     public class UIStyleSelectableProfileEditor : UIStyleProfileEditor
     {
+        [InitializeOnLoadMethod]
+        public static void OnAssemblyLoad()
+        {
+            UIStyleProfileContainerUtil.RegisterColorFields<UIStyleSelectableProfile>(new string[]
+            {
+                nameof(UIStyleSelectableProfile.normalColor),
+                nameof(UIStyleSelectableProfile.highlightedColor),
+                nameof(UIStyleSelectableProfile.pressedColor),
+                nameof(UIStyleSelectableProfile.selectedColor),
+                nameof(UIStyleSelectableProfile.disabledColor),
+            });
+            UIStyleProfileContainerUtil.RegisterSpriteFields<UIStyleSelectableProfile>(new string[]
+            {
+                nameof(UIStyleSelectableProfile.highlightedSprite),
+                nameof(UIStyleSelectableProfile.pressedSprite),
+                nameof(UIStyleSelectableProfile.selectedSprite),
+                nameof(UIStyleSelectableProfile.disabledSprite),
+            });
+        }
+
         private SerializedProperty interactableProp;
         private SerializedProperty transitionProp;
         private SerializedProperty normalColorProp;

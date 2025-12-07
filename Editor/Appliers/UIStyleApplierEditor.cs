@@ -79,9 +79,9 @@ namespace JanSharp
             {
                 if (!UIStyleProfileContainerUtil.IsProfileActive(profile))
                     continue;
-                if (profile.profileName == "" || profile.profileName.Trim().Length != profile.profileName.Length)
+                if (UIStylingEditorUtil.HasEmptyProfileName(profile) || UIStylingEditorUtil.HasLeadingTrailingWhitespace(profile))
                 {
-                    errorMsg = "Some UI Style Profiles have invalid profile names.";
+                    errorMsg = "Some UI Style Profiles have invalid Profile Names.";
                     return false;
                 }
                 profileNamesList.Add(profile.profileName);
