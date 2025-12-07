@@ -977,6 +977,7 @@ Transform:
   - {fileID: 1572389778}
   - {fileID: 343017456}
   - {fileID: 396126052}
+  - {fileID: 1520920224}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1035997677 stripped
@@ -985,6 +986,64 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1863335461}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1520920223
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1520920224}
+  - component: {fileID: 1520920225}
+  m_Layer: 0
+  m_Name: Horizontal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1520920224
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520920223}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 865476450}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1520920225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520920223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85281c0a5a013103cb4d4db6bbfbf693, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profileName: layout-group.horizontal
+  paddingLeft: 2
+  paddingRight: 2
+  paddingTop: 2
+  paddingBottom: 2
+  spacing: 0
+  childAlignment: 0
+  reverseArrangement: 0
+  controlChildWidth: 1
+  controlChildHeight: 1
+  useChildScaleWidth: 0
+  useChildScaleHeight: 0
+  childForceExpandWidth: 0
+  childForceExpandHeight: 0
 --- !u!1 &1537914981
 GameObject:
   m_ObjectHideFlags: 0
@@ -995,6 +1054,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1537914982}
   - component: {fileID: 1537914983}
+  - component: {fileID: 1537914984}
   m_Layer: 17
   m_Name: Horizontal
   m_TagString: Untagged
@@ -1048,6 +1108,32 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1537914984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537914981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf4f235d12cc32e85867e2822ff1612e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profileName: layout-group.horizontal
+  controlPaddingLeft: 1
+  controlPaddingRight: 1
+  controlPaddingTop: 1
+  controlPaddingBottom: 1
+  controlSpacing: 1
+  controlChildAlignment: 1
+  controlReverseArrangement: 1
+  controlControlChildWidth: 1
+  controlControlChildHeight: 1
+  controlUseChildScaleWidth: 1
+  controlUseChildScaleHeight: 1
+  controlChildForceExpandWidth: 1
+  controlChildForceExpandHeight: 1
 --- !u!1 &1572389776
 GameObject:
   m_ObjectHideFlags: 0

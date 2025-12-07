@@ -4,3 +4,4 @@
 - [ ] profile container inspector
 - [ ] maybe a list of all appliers in the root inspector?
 - [ ] maybe inlining of the color or sprite for pallet references in profiles
+- [ ] show warning in applier inspector for invalid profile names, or missing root
