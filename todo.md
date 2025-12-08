@@ -11,7 +11,7 @@
 - [x] tmp text
 - [ ] tmp input field
 - [x] scroll ~~view~~ rect
-- [ ] scroll bar
+- [x] scrollbar
 - [ ] slider
 - [ ] maybe tmp dropdown
 - [ ] make all the applier inspectors use a collapsed scope for all the control checkboxes
