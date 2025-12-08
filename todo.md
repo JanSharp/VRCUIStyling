@@ -10,7 +10,7 @@
 - [ ] use intValue rather than enumValueIndex, because enumValueIndex is just wrong
 - [x] tmp text
 - [ ] tmp input field
-- [ ] scroll view
+- [x] scroll ~~view~~ rect
 - [ ] scroll bar
 - [ ] slider
 - [ ] maybe tmp dropdown
