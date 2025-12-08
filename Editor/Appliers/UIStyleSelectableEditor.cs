@@ -29,7 +29,7 @@ namespace JanSharp
             if (applier.controlInteractable)
                 so.FindProperty("m_Interactable").boolValue = profile.interactable;
             if (applier.controlTransition)
-                so.FindProperty("m_Transition").intValue = (int)profile.transition;
+                so.FindProperty("m_Transition").enumValueIndex = (int)profile.transition;
             if (applier.controlNormalColor)
                 so.FindProperty("m_Colors.m_NormalColor").colorValue = context.colorsByName[profile.normalColor];
             if (applier.controlHighlightedColor)

@@ -31,7 +31,7 @@ namespace JanSharp
             if (applier.controlSpacing)
                 so.FindProperty("m_Spacing").floatValue = profile.spacing;
             if (applier.controlChildAlignment)
-                so.FindProperty("m_ChildAlignment").intValue = (int)profile.childAlignment;
+                so.FindProperty("m_ChildAlignment").enumValueIndex = (int)profile.childAlignment;
             if (applier.controlReverseArrangement)
                 so.FindProperty("m_ReverseArrangement").boolValue = profile.reverseArrangement;
             if (applier.controlControlChildWidth)

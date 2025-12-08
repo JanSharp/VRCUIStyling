@@ -24,7 +24,7 @@ namespace JanSharp
             if (applier.controlIsOn)
                 so.FindProperty("m_IsOn").boolValue = profile.isOn;
             if (applier.controlToggleTransition)
-                so.FindProperty("toggleTransition").intValue = (int)profile.toggleTransition;
+                so.FindProperty("toggleTransition").enumValueIndex = (int)profile.toggleTransition;
             so.ApplyModifiedProperties();
         }
 
