@@ -144,6 +144,11 @@ namespace JanSharp
 
         public override void OnInspectorGUI()
         {
+            DrawProfileEditor();
+        }
+
+        protected void DrawProfileEditor()
+        {
             if (!IsValid)
             {
                 using (new GUILayout.VerticalScope(EditorStyles.helpBox))

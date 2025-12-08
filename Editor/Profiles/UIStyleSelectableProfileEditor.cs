@@ -9,7 +9,13 @@ namespace JanSharp
         [InitializeOnLoadMethod]
         public static void OnAssemblyLoad()
         {
-            UIStyleProfileContainerUtil.RegisterColorFields<UIStyleSelectableProfile>(new string[]
+            RegisterSelectableColorSpriteFields<UIStyleSelectableProfile>();
+        }
+
+        protected static void RegisterSelectableColorSpriteFields<T>()
+            where T : UIStyleSelectableProfile
+        {
+            UIStyleProfileContainerUtil.RegisterColorFields<T>(new string[]
             {
                 nameof(UIStyleSelectableProfile.normalColor),
                 nameof(UIStyleSelectableProfile.highlightedColor),
@@ -17,7 +23,7 @@ namespace JanSharp
                 nameof(UIStyleSelectableProfile.selectedColor),
                 nameof(UIStyleSelectableProfile.disabledColor),
             });
-            UIStyleProfileContainerUtil.RegisterSpriteFields<UIStyleSelectableProfile>(new string[]
+            UIStyleProfileContainerUtil.RegisterSpriteFields<T>(new string[]
             {
                 nameof(UIStyleSelectableProfile.highlightedSprite),
                 nameof(UIStyleSelectableProfile.pressedSprite),
@@ -63,7 +69,13 @@ namespace JanSharp
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
-            base.OnInspectorGUI();
+            DrawProfileEditor();
+            DrawSelectableFields();
+            serializedObject.ApplyModifiedProperties();
+        }
+
+        protected void DrawSelectableFields()
+        {
             EditorGUILayout.PropertyField(interactableProp);
             EditorGUILayout.PropertyField(transitionProp);
             DrawColorSelectorField(normalColorProp);
@@ -78,7 +90,6 @@ namespace JanSharp
             DrawSpriteSelectorField(selectedSpriteProp);
             DrawSpriteSelectorField(disabledSpriteProp);
             EditorGUILayout.PropertyField(navigationProp);
-            serializedObject.ApplyModifiedProperties();
         }
     }
 }

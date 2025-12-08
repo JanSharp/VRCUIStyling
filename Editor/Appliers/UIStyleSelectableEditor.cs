@@ -20,6 +20,12 @@ namespace JanSharp
             Selectable target)
         {
             SerializedObject so = new(target);
+            ApplySelectableStyle(so, context, applier, profile);
+            so.ApplyModifiedProperties();
+        }
+
+        public static void ApplySelectableStyle(SerializedObject so, ValidationContext context, UIStyleSelectable applier, UIStyleSelectableProfile profile)
+        {
             if (applier.controlInteractable)
                 so.FindProperty("m_Interactable").boolValue = profile.interactable;
             if (applier.controlTransition)
@@ -51,7 +57,6 @@ namespace JanSharp
                 so.FindProperty("m_Navigation.m_Mode").enumValueFlag = (int)profile.navigation.mode;
                 so.FindProperty("m_Navigation.m_WrapAround").boolValue = profile.navigation.wrapAround;
             }
-            so.ApplyModifiedProperties();
         }
 
         /*
