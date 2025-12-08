@@ -39,7 +39,7 @@ namespace JanSharp
             if (applier.controlMaskable)
                 so.FindProperty("m_Maskable").boolValue = profile.maskable;
             if (applier.controlImageType)
-                so.FindProperty("m_Type").enumValueIndex = (int)profile.imageType;
+                so.FindProperty("m_Type").intValue = (int)profile.imageType;
             if (applier.controlUseSpriteMesh)
                 so.FindProperty("m_UseSpriteMesh").boolValue = profile.useSpriteMesh;
             if (applier.controlPreserveAspect)
@@ -49,7 +49,7 @@ namespace JanSharp
             if (applier.controlPixelsPerUnitMultiplier)
                 so.FindProperty("m_PixelsPerUnitMultiplier").floatValue = profile.pixelsPerUnitMultiplier;
             if (applier.controlFillMethod)
-                so.FindProperty("m_FillMethod").enumValueIndex = (int)profile.fillMethod;
+                so.FindProperty("m_FillMethod").intValue = (int)profile.fillMethod;
             if (applier.controlFillOrigin)
                 so.FindProperty("m_FillOrigin").intValue = ConvertFillOrigin(profile.fillOrigin);
             if (applier.controlFillAmount)

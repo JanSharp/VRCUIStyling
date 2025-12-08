@@ -7,7 +7,7 @@
 - [ ] show warning in applier inspector for invalid profile names, or missing root
 - [ ] maybe rect transform support, most likely particularly for being able to control left right top bottom "padding" when it is set to stretch, but should probably be just fully generic. Just
 - [x] use enumValueIndex where applicable
-- [ ] use intValue rather than enumValueIndex, because enumValueIndex is just wrong
+- [x] use intValue rather than enumValueIndex, because enumValueIndex is just wrong
 - [x] tmp text
 - [ ] tmp input field
 - [x] scroll ~~view~~ rect

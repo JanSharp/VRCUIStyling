@@ -169,7 +169,7 @@ namespace JanSharp
             EditorGUILayout.Space();
             EditorGUILayout.PropertyField(horizontalMappingProp);
             EditorGUILayout.PropertyField(verticalMappingProp);
-            if (((TextureMappingOptions)horizontalMappingProp.enumValueIndex) != TextureMappingOptions.Character)
+            if (((TextureMappingOptions)horizontalMappingProp.intValue) != TextureMappingOptions.Character)
                 EditorGUILayout.PropertyField(uVLineOffsetProp);
             EditorGUILayout.Space();
             EditorGUILayout.PropertyField(marginLeftProp);
