@@ -7,9 +7,12 @@
 - [ ] show warning in applier inspector for invalid profile names, or missing root
 - [ ] maybe rect transform support, most likely particularly for being able to control left right top bottom "padding" when it is set to stretch, but should probably be just fully generic. Just
 - [x] use enumValueIndex where applicable
-- [ ] tmp text
+- [ ] use intValue rather than enumValueIndex, because enumValueIndex is just wrong
+- [x] tmp text
 - [ ] tmp input field
 - [ ] scroll view
 - [ ] scroll bar
 - [ ] slider
 - [ ] maybe tmp dropdown
+- [ ] make all the applier inspectors use a collapsed scope for all the control checkboxes
+- [ ] use VRC Default button for image material

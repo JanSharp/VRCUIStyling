@@ -32,11 +32,17 @@ namespace JanSharp
         }
 
         public static void DrawSelectorField(SerializedProperty prop, bool disabled, string[] names)
+            => DrawSelectorField(prop, disabled, names, p => EditorGUILayout.PropertyField(prop));
+
+        public static void DrawSelectorField(SerializedProperty prop, GUIContent label, bool disabled, string[] names)
+            => DrawSelectorField(prop, disabled, names, p => EditorGUILayout.PropertyField(prop, label));
+
+        private static void DrawSelectorField(SerializedProperty prop, bool disabled, string[] names, System.Action<SerializedProperty> drawProp)
         {
             using (new EditorGUI.DisabledScope(disabled))
             using (new GUILayout.HorizontalScope())
             {
-                EditorGUILayout.PropertyField(prop);
+                drawProp(prop);
                 int index = EditorGUILayout.Popup(0, names, GUILayout.Width(20f));
                 if (index != 0)
                     prop.stringValue = names[index];
@@ -183,8 +189,12 @@ namespace JanSharp
 
         protected void DrawColorSelectorField(SerializedProperty prop)
             => UIStyleProfileUtil.DrawSelectorField(prop, !IsValid, colorNames);
+        protected void DrawColorSelectorField(SerializedProperty prop, GUIContent label)
+            => UIStyleProfileUtil.DrawSelectorField(prop, label, !IsValid, colorNames);
 
         protected void DrawSpriteSelectorField(SerializedProperty prop)
             => UIStyleProfileUtil.DrawSelectorField(prop, !IsValid, spriteNames);
+        protected void DrawSpriteSelectorField(SerializedProperty prop, GUIContent label)
+            => UIStyleProfileUtil.DrawSelectorField(prop, label, !IsValid, spriteNames);
     }
 }
