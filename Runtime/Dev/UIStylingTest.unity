@@ -735,7 +735,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 343017455}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3aa988bd5cfdfb708b1724df46849da0, type: 3}
+  m_Script: {fileID: 11500000, guid: 1351dcbfeb109c05c80f32d82548d98e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   profileName: button
@@ -834,71 +834,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 370168400}
   m_CullTransparentMesh: 1
---- !u!1 &396126051
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 396126052}
-  - component: {fileID: 396126053}
-  m_Layer: 0
-  m_Name: ButtonTwo
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &396126052
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 396126051}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 865476450}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &396126053
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 396126051}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3aa988bd5cfdfb708b1724df46849da0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  profileName: button-two
-  interactable: 1
-  transition: 1
-  normalColor: button.normal
-  highlightedColor: button.highlighted
-  pressedColor: button.pressed
-  selectedColor: button.selected
-  disabledColor: button.disabled
-  colorMultiplier: 1
-  fadeDuration: 0.1
-  highlightedSprite: 
-  pressedSprite: 
-  selectedSprite: 
-  disabledSprite: 
-  navigation:
-    m_Mode: 0
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
 --- !u!1 &404176417
 GameObject:
   m_ObjectHideFlags: 0
@@ -912,7 +847,7 @@ GameObject:
   - component: {fileID: 404176421}
   - component: {fileID: 404176420}
   - component: {fileID: 404176419}
-  - component: {fileID: 404176424}
+  - component: {fileID: 404176426}
   - component: {fileID: 404176425}
   m_Layer: 17
   m_Name: Button
@@ -1043,33 +978,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 404176417}
   m_CullTransparentMesh: 1
---- !u!114 &404176424
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 404176417}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1f3c00a2a5a6c9e3a1be8f8e3abdba1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  profileName: button
-  controlInteractable: 0
-  controlTransition: 1
-  controlNormalColor: 1
-  controlHighlightedColor: 1
-  controlPressedColor: 1
-  controlSelectedColor: 1
-  controlDisabledColor: 1
-  controlColorMultiplier: 1
-  controlFadeDuration: 1
-  controlHighlightedSprite: 1
-  controlPressedSprite: 1
-  controlSelectedSprite: 1
-  controlDisabledSprite: 1
-  controlNavigation: 1
 --- !u!114 &404176425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1091,6 +999,33 @@ MonoBehaviour:
   controlFlexibleWidth: 1
   controlFlexibleHeight: 1
   controlLayoutPriority: 1
+--- !u!114 &404176426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 404176417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b86169c2543d02c7a4f69a640e9b293, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profileName: button
+  controlInteractable: 0
+  controlTransition: 1
+  controlNormalColor: 1
+  controlHighlightedColor: 1
+  controlPressedColor: 1
+  controlSelectedColor: 1
+  controlDisabledColor: 1
+  controlColorMultiplier: 1
+  controlFadeDuration: 1
+  controlHighlightedSprite: 1
+  controlPressedSprite: 1
+  controlSelectedSprite: 1
+  controlDisabledSprite: 1
+  controlNavigation: 1
 --- !u!1 &649115904
 GameObject:
   m_ObjectHideFlags: 0
@@ -1206,7 +1141,6 @@ Transform:
   - {fileID: 34961285}
   - {fileID: 1572389778}
   - {fileID: 343017456}
-  - {fileID: 396126052}
   - {fileID: 1520920224}
   - {fileID: 250467516}
   - {fileID: 1989697554}
