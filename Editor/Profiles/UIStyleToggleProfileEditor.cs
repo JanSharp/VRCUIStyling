@@ -18,8 +18,8 @@ namespace JanSharp
         public override void OnEnable()
         {
             base.OnEnable();
-            isOnProp = serializedObject.FindProperty("isOn");
-            toggleTransitionProp = serializedObject.FindProperty("toggleTransition");
+            isOnProp = serializedObject.FindProperty(nameof(UIStyleToggleProfile.isOn));
+            toggleTransitionProp = serializedObject.FindProperty(nameof(UIStyleToggleProfile.toggleTransition));
         }
 
         public override void OnInspectorGUI()

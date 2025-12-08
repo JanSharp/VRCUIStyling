@@ -22,17 +22,17 @@ namespace JanSharp
         public override void OnEnable()
         {
             base.OnEnable();
-            horizontalProp = serializedObject.FindProperty("horizontal");
-            verticalProp = serializedObject.FindProperty("vertical");
-            movementTypeProp = serializedObject.FindProperty("movementType");
-            elasticityProp = serializedObject.FindProperty("elasticity");
-            inertiaProp = serializedObject.FindProperty("inertia");
-            decelerationRateProp = serializedObject.FindProperty("decelerationRate");
-            scrollSensitivityProp = serializedObject.FindProperty("scrollSensitivity");
-            horizontalVisibilityProp = serializedObject.FindProperty("horizontalVisibility");
-            horizontalSpacingProp = serializedObject.FindProperty("horizontalSpacing");
-            verticalVisibilityProp = serializedObject.FindProperty("verticalVisibility");
-            verticalSpacingProp = serializedObject.FindProperty("verticalSpacing");
+            horizontalProp = serializedObject.FindProperty(nameof(UIStyleScrollRectProfile.horizontal));
+            verticalProp = serializedObject.FindProperty(nameof(UIStyleScrollRectProfile.vertical));
+            movementTypeProp = serializedObject.FindProperty(nameof(UIStyleScrollRectProfile.movementType));
+            elasticityProp = serializedObject.FindProperty(nameof(UIStyleScrollRectProfile.elasticity));
+            inertiaProp = serializedObject.FindProperty(nameof(UIStyleScrollRectProfile.inertia));
+            decelerationRateProp = serializedObject.FindProperty(nameof(UIStyleScrollRectProfile.decelerationRate));
+            scrollSensitivityProp = serializedObject.FindProperty(nameof(UIStyleScrollRectProfile.scrollSensitivity));
+            horizontalVisibilityProp = serializedObject.FindProperty(nameof(UIStyleScrollRectProfile.horizontalVisibility));
+            horizontalSpacingProp = serializedObject.FindProperty(nameof(UIStyleScrollRectProfile.horizontalSpacing));
+            verticalVisibilityProp = serializedObject.FindProperty(nameof(UIStyleScrollRectProfile.verticalVisibility));
+            verticalSpacingProp = serializedObject.FindProperty(nameof(UIStyleScrollRectProfile.verticalSpacing));
         }
 
         public override void OnInspectorGUI()

@@ -41,24 +41,24 @@ namespace JanSharp
         public override void OnEnable()
         {
             base.OnEnable();
-            sourceImageProp = serializedObject.FindProperty("sourceImage");
-            colorProp = serializedObject.FindProperty("color");
-            materialProp = serializedObject.FindProperty("material");
-            raycastTargetProp = serializedObject.FindProperty("raycastTarget");
-            raycastPaddingLeftProp = serializedObject.FindProperty("raycastPaddingLeft");
-            raycastPaddingBottomProp = serializedObject.FindProperty("raycastPaddingBottom");
-            raycastPaddingRightProp = serializedObject.FindProperty("raycastPaddingRight");
-            raycastPaddingTopProp = serializedObject.FindProperty("raycastPaddingTop");
-            maskableProp = serializedObject.FindProperty("maskable");
-            imageTypeProp = serializedObject.FindProperty("imageType");
-            useSpriteMeshProp = serializedObject.FindProperty("useSpriteMesh");
-            preserveAspectProp = serializedObject.FindProperty("preserveAspect");
-            fillCenterProp = serializedObject.FindProperty("fillCenter");
-            pixelsPerUnitMultiplierProp = serializedObject.FindProperty("pixelsPerUnitMultiplier");
-            fillMethodProp = serializedObject.FindProperty("fillMethod");
-            fillOriginProp = serializedObject.FindProperty("fillOrigin");
-            fillAmountProp = serializedObject.FindProperty("fillAmount");
-            clockwiseProp = serializedObject.FindProperty("clockwise");
+            sourceImageProp = serializedObject.FindProperty(nameof(UIStyleImageProfile.sourceImage));
+            colorProp = serializedObject.FindProperty(nameof(UIStyleImageProfile.color));
+            materialProp = serializedObject.FindProperty(nameof(UIStyleImageProfile.material));
+            raycastTargetProp = serializedObject.FindProperty(nameof(UIStyleImageProfile.raycastTarget));
+            raycastPaddingLeftProp = serializedObject.FindProperty(nameof(UIStyleImageProfile.raycastPaddingLeft));
+            raycastPaddingBottomProp = serializedObject.FindProperty(nameof(UIStyleImageProfile.raycastPaddingBottom));
+            raycastPaddingRightProp = serializedObject.FindProperty(nameof(UIStyleImageProfile.raycastPaddingRight));
+            raycastPaddingTopProp = serializedObject.FindProperty(nameof(UIStyleImageProfile.raycastPaddingTop));
+            maskableProp = serializedObject.FindProperty(nameof(UIStyleImageProfile.maskable));
+            imageTypeProp = serializedObject.FindProperty(nameof(UIStyleImageProfile.imageType));
+            useSpriteMeshProp = serializedObject.FindProperty(nameof(UIStyleImageProfile.useSpriteMesh));
+            preserveAspectProp = serializedObject.FindProperty(nameof(UIStyleImageProfile.preserveAspect));
+            fillCenterProp = serializedObject.FindProperty(nameof(UIStyleImageProfile.fillCenter));
+            pixelsPerUnitMultiplierProp = serializedObject.FindProperty(nameof(UIStyleImageProfile.pixelsPerUnitMultiplier));
+            fillMethodProp = serializedObject.FindProperty(nameof(UIStyleImageProfile.fillMethod));
+            fillOriginProp = serializedObject.FindProperty(nameof(UIStyleImageProfile.fillOrigin));
+            fillAmountProp = serializedObject.FindProperty(nameof(UIStyleImageProfile.fillAmount));
+            clockwiseProp = serializedObject.FindProperty(nameof(UIStyleImageProfile.clockwise));
         }
 
         public override void OnInspectorGUI()
