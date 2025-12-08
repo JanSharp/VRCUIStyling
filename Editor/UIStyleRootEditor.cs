@@ -53,10 +53,23 @@ namespace JanSharp
         {
             bool result = true;
 
-            if (!context.profilesByName.TryGetValue(applier.profileName, out UIStyleProfile profile))
+            System.Type targetType = associatedComponentTypeByApplierType[applier.GetType()];
+            if (!applier.TryGetComponent(targetType, out _))
             {
                 result = false;
+                context.AddValidationError(new ApplierMissingAssociatedTargetComponentError(applier, targetType));
+            }
+
+            if (UIStylingEditorUtil.IsEmptyName(applier.profileName))
+            {
+                context.AddValidationError(new EmptyProfileNameForApplierError(applier));
+                return false;
+            }
+
+            if (!context.profilesByName.TryGetValue(applier.profileName, out UIStyleProfile profile))
+            {
                 context.AddValidationError(new MissingProfileReferenceError(applier));
+                return false;
             }
 
             System.Type expectedProfileType = associatedProfileTypeByApplierType[applier.GetType()];
@@ -64,13 +77,6 @@ namespace JanSharp
             {
                 result = false;
                 context.AddValidationError(new ApplierProfileTypeMismatchError(applier, profile, expectedProfileType));
-            }
-
-            System.Type targetType = associatedComponentTypeByApplierType[applier.GetType()];
-            if (!applier.TryGetComponent(targetType, out _))
-            {
-                result = false;
-                context.AddValidationError(new ApplierMissingAssociatedTargetComponentError(applier, targetType));
             }
 
             return result;

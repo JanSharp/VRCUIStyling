@@ -7,7 +7,7 @@ namespace JanSharp
 {
     public static class UIStylingEditorUtil
     {
-        public static bool IsEmptyName(string name) => name == "";
+        public static bool IsEmptyName(string name) => string.IsNullOrEmpty(name);
         public static bool HasLeadingTrailingWhitespace(string name) => name.Trim().Length != name.Length;
         public static bool HasEmptyProfileName(UIStyleProfile profile) => IsEmptyName(profile.profileName);
         public static bool HasLeadingTrailingWhitespace(UIStyleProfile profile) => HasLeadingTrailingWhitespace(profile.profileName);
@@ -281,6 +281,32 @@ namespace JanSharp
         {
             GUILayout.Label(GetErrorMessage(), EditorStyles.wordWrappedLabel);
             EditorGUILayout.ObjectField("Profile In Question", profile, profileType, allowSceneObjects: true);
+        }
+    }
+
+    public class EmptyProfileNameForApplierError : ValidationError
+    {
+        public UIStyleApplier applier;
+        public System.Type applierType;
+        public string goName;
+
+        public EmptyProfileNameForApplierError(UIStyleApplier applier)
+        {
+            this.applier = applier;
+            // The applier could get deleted, prefetch these.
+            applierType = applier.GetType();
+            goName = applier.name;
+        }
+
+        private string GetErrorMessage() => $"The {applierType.Name} on the object {goName} does not have a "
+            + $"Profile Name set for it to reference.";
+
+        public override void Log() => Debug.LogError($"[UIStyling] {GetErrorMessage()}", applier);
+
+        public override void Draw()
+        {
+            GUILayout.Label(GetErrorMessage(), EditorStyles.wordWrappedLabel);
+            EditorGUILayout.ObjectField("Applier In Question", applier, applierType, allowSceneObjects: true);
         }
     }
 
