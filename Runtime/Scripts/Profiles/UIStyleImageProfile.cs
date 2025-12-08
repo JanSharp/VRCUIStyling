@@ -1,3 +1,6 @@
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -60,5 +63,13 @@ namespace JanSharp
         [Range(0f, 1f)]
         public float fillAmount = 1f;
         public bool clockwise = true;
+
+#if UNITY_EDITOR
+        private void Reset()
+        {
+            material = AssetDatabase.LoadAssetAtPath<Material>(
+                AssetDatabase.GUIDToAssetPath("35630e38b4e5ffb40b44ec5348b4333f"));
+        }
+#endif
     }
 }

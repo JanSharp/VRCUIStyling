@@ -15,4 +15,4 @@
 - [ ] slider
 - [ ] maybe tmp dropdown
 - [ ] make all the applier inspectors use a collapsed scope for all the control checkboxes
-- [ ] use VRC Default button for image material
+- [x] ~~use VRC Default button for image material~~ use the VRC material by default using the Reset event
