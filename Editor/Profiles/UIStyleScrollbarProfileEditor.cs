@@ -31,6 +31,7 @@ namespace JanSharp
             serializedObject.Update();
             DrawProfileEditor();
             DrawSelectableFields();
+            EditorGUILayout.Space();
             EditorGUILayout.PropertyField(directionProp);
             EditorGUILayout.PropertyField(valueProp);
             EditorGUILayout.PropertyField(sizeProp);

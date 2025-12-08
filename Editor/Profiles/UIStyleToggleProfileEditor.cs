@@ -27,6 +27,7 @@ namespace JanSharp
             serializedObject.Update();
             DrawProfileEditor();
             DrawSelectableFields();
+            EditorGUILayout.Space();
             EditorGUILayout.PropertyField(isOnProp);
             EditorGUILayout.PropertyField(toggleTransitionProp);
             serializedObject.ApplyModifiedProperties();
