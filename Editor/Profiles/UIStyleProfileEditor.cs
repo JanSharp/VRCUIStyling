@@ -144,7 +144,9 @@ namespace JanSharp
 
         public override void OnInspectorGUI()
         {
+            serializedObject.Update();
             DrawProfileEditor();
+            serializedObject.ApplyModifiedProperties();
         }
 
         protected void DrawProfileEditor()

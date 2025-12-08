@@ -9,7 +9,7 @@ namespace JanSharp
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
-            base.OnInspectorGUI();
+            DrawProfileEditor();
             DrawPropertiesExcluding(serializedObject, "m_Script", nameof(UIStyleProfile.profileName));
             serializedObject.ApplyModifiedProperties();
         }
