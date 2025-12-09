@@ -1,6 +1,7 @@
 
 - [ ] color pallet inspector
 - [ ] sprite pallet inspector
+- [ ] maybe some way to rename a color/sprite pallet entry which also ends up affecting all profiles referencing it
 - [ ] profile container inspector
 - [ ] maybe a list of all appliers in the root inspector?
 - [ ] maybe inlining of the color or sprite for pallet references in profiles
@@ -12,7 +13,7 @@
 - [ ] tmp input field
 - [x] scroll ~~view~~ rect
 - [x] scrollbar
-- [ ] slider
+- [x] slider
 - [ ] maybe tmp dropdown
 - [ ] make all the applier inspectors use a collapsed scope for all the control checkboxes
 - [x] ~~use VRC Default button for image material~~ use the VRC material by default using the Reset event
