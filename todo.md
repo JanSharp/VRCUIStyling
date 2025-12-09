@@ -21,3 +21,5 @@
 - [x] context buttons for all ui components to add their respective applier
 - [x] apply style button for each individual applier
 - [ ] maybe add a validation error for leading or trailing white space for profile names for appliers
+- [ ] make the image profile inspector hide fields based on what type is selected
+- [ ] make the selectable profile inspector hide fields based on what type is selected
