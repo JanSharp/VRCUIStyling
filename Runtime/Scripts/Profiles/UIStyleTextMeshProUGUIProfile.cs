@@ -82,6 +82,7 @@ namespace JanSharp
 #if UNITY_EDITOR
         private void Reset()
         {
+            // It would seem TMP itself finds the asset by path this way.
             fontAsset = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(
                 "Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset");
             materialPreset = fontAsset?.material;

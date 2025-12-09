@@ -10,7 +10,8 @@
 - [x] use enumValueIndex where applicable
 - [x] use intValue rather than enumValueIndex, because enumValueIndex is just wrong
 - [x] tmp text
-- [ ] tmp input field
+- [x] tmp input field
+  - [ ] maybe add support for custom, but check how much of that is even supported by VRChat
 - [x] scroll ~~view~~ rect
 - [x] scrollbar
 - [x] slider

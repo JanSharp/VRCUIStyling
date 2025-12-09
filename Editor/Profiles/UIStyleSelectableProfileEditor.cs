@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEditor;
 
 namespace JanSharp
@@ -12,24 +13,32 @@ namespace JanSharp
             RegisterSelectableColorSpriteFields<UIStyleSelectableProfile>();
         }
 
-        protected static void RegisterSelectableColorSpriteFields<T>()
+        protected static void RegisterSelectableColorSpriteFields<T>(
+            string[] extraColorFields = null,
+            string[] extraSpriteFields = null)
             where T : UIStyleSelectableProfile
         {
-            UIStyleProfileContainerUtil.RegisterColorFields<T>(new string[]
+            string[] colorFields = new string[]
             {
                 nameof(UIStyleSelectableProfile.normalColor),
                 nameof(UIStyleSelectableProfile.highlightedColor),
                 nameof(UIStyleSelectableProfile.pressedColor),
                 nameof(UIStyleSelectableProfile.selectedColor),
                 nameof(UIStyleSelectableProfile.disabledColor),
-            });
-            UIStyleProfileContainerUtil.RegisterSpriteFields<T>(new string[]
+            };
+            string[] spriteFields = new string[]
             {
                 nameof(UIStyleSelectableProfile.highlightedSprite),
                 nameof(UIStyleSelectableProfile.pressedSprite),
                 nameof(UIStyleSelectableProfile.selectedSprite),
                 nameof(UIStyleSelectableProfile.disabledSprite),
-            });
+            };
+            if (extraColorFields != null)
+                colorFields = colorFields.Union(extraColorFields).ToArray();
+            if (extraSpriteFields != null)
+                spriteFields = spriteFields.Union(extraSpriteFields).ToArray();
+            UIStyleProfileContainerUtil.RegisterColorFields<T>(colorFields);
+            UIStyleProfileContainerUtil.RegisterSpriteFields<T>(spriteFields);
         }
 
         private SerializedProperty interactableProp;
