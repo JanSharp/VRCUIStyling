@@ -7,6 +7,14 @@ namespace JanSharp
     [CustomEditor(typeof(UIStyleButton))]
     public class UIStyleButtonEditor : UIStyleApplierEditor<UIStyleButtonProfile>
     {
+        [MenuItem("CONTEXT/" + nameof(Button) + "/Control Using UI Style", isValidateFunction: true)]
+        public static bool AddApplierValidation(MenuCommand menuCommand)
+            => UIStyleApplierUtil.ContextMenuAddApplierValidation<UIStyleButton>(menuCommand);
+
+        [MenuItem("CONTEXT/" + nameof(Button) + "/Control Using UI Style")]
+        public static void AddApplier(MenuCommand menuCommand)
+            => UIStyleApplierUtil.ContextMenuAddApplier<UIStyleButton>(menuCommand);
+
         [InitializeOnLoadMethod]
         public static void OnAssemblyLoad()
         {

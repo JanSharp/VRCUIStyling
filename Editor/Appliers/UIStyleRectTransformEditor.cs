@@ -7,6 +7,14 @@ namespace JanSharp
     [CustomEditor(typeof(UIStyleRectTransform))]
     public class UIStyleRectTransformEditor : UIStyleApplierEditor<UIStyleRectTransformProfile>
     {
+        [MenuItem("CONTEXT/" + nameof(RectTransform) + "/Control Using UI Style", isValidateFunction: true)]
+        public static bool AddApplierValidation(MenuCommand menuCommand)
+            => UIStyleApplierUtil.ContextMenuAddApplierValidation<UIStyleRectTransform>(menuCommand);
+
+        [MenuItem("CONTEXT/" + nameof(RectTransform) + "/Control Using UI Style")]
+        public static void AddApplier(MenuCommand menuCommand)
+            => UIStyleApplierUtil.ContextMenuAddApplier<UIStyleRectTransform>(menuCommand);
+
         [InitializeOnLoadMethod]
         public static void OnAssemblyLoad()
         {

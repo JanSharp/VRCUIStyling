@@ -7,6 +7,14 @@ namespace JanSharp
     [CustomEditor(typeof(UIStyleSelectable))]
     public class UIStyleSelectableEditor : UIStyleApplierEditor<UIStyleSelectableProfile>
     {
+        [MenuItem("CONTEXT/" + nameof(Selectable) + "/Control Using UI Style", isValidateFunction: true)]
+        public static bool AddApplierValidation(MenuCommand menuCommand)
+            => UIStyleApplierUtil.ContextMenuAddApplierValidation<UIStyleSelectable>(menuCommand);
+
+        [MenuItem("CONTEXT/" + nameof(Selectable) + "/Control Using UI Style")]
+        public static void AddApplier(MenuCommand menuCommand)
+            => UIStyleApplierUtil.ContextMenuAddApplier<UIStyleSelectable>(menuCommand);
+
         [InitializeOnLoadMethod]
         public static void OnAssemblyLoad()
         {

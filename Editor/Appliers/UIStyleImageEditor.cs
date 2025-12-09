@@ -7,6 +7,14 @@ namespace JanSharp
     [CustomEditor(typeof(UIStyleImage))]
     public class UIStyleImageEditor : UIStyleApplierEditor<UIStyleImageProfile>
     {
+        [MenuItem("CONTEXT/" + nameof(Image) + "/Control Using UI Style", isValidateFunction: true)]
+        public static bool AddApplierValidation(MenuCommand menuCommand)
+            => UIStyleApplierUtil.ContextMenuAddApplierValidation<UIStyleImage>(menuCommand);
+
+        [MenuItem("CONTEXT/" + nameof(Image) + "/Control Using UI Style")]
+        public static void AddApplier(MenuCommand menuCommand)
+            => UIStyleApplierUtil.ContextMenuAddApplier<UIStyleImage>(menuCommand);
+
         [InitializeOnLoadMethod]
         public static void OnAssemblyLoad()
         {

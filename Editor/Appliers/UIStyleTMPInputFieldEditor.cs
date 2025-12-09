@@ -7,6 +7,14 @@ namespace JanSharp
     [CustomEditor(typeof(UIStyleTMPInputField))]
     public class UIStyleTMPInputFieldEditor : UIStyleApplierEditor<UIStyleTMPInputFieldProfile>
     {
+        [MenuItem("CONTEXT/" + nameof(TMP_InputField) + "/Control Using UI Style", isValidateFunction: true)]
+        public static bool AddApplierValidation(MenuCommand menuCommand)
+            => UIStyleApplierUtil.ContextMenuAddApplierValidation<UIStyleTMPInputField>(menuCommand);
+
+        [MenuItem("CONTEXT/" + nameof(TMP_InputField) + "/Control Using UI Style")]
+        public static void AddApplier(MenuCommand menuCommand)
+            => UIStyleApplierUtil.ContextMenuAddApplier<UIStyleTMPInputField>(menuCommand);
+
         [InitializeOnLoadMethod]
         public static void OnAssemblyLoad()
         {

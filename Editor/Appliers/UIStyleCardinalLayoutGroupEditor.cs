@@ -7,6 +7,14 @@ namespace JanSharp
     [CustomEditor(typeof(UIStyleCardinalLayoutGroup))]
     public class UIStyleCardinalLayoutGroupEditor : UIStyleApplierEditor<UIStyleCardinalLayoutGroupProfile>
     {
+        [MenuItem("CONTEXT/" + nameof(HorizontalOrVerticalLayoutGroup) + "/Control Using UI Style", isValidateFunction: true)]
+        public static bool AddApplierValidation(MenuCommand menuCommand)
+            => UIStyleApplierUtil.ContextMenuAddApplierValidation<UIStyleCardinalLayoutGroup>(menuCommand);
+
+        [MenuItem("CONTEXT/" + nameof(HorizontalOrVerticalLayoutGroup) + "/Control Using UI Style")]
+        public static void AddApplier(MenuCommand menuCommand)
+            => UIStyleApplierUtil.ContextMenuAddApplier<UIStyleCardinalLayoutGroup>(menuCommand);
+
         [InitializeOnLoadMethod]
         public static void OnAssemblyLoad()
         {

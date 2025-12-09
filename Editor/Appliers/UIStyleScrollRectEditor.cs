@@ -7,6 +7,14 @@ namespace JanSharp
     [CustomEditor(typeof(UIStyleScrollRect))]
     public class UIStyleScrollRectEditor : UIStyleApplierEditor<UIStyleScrollRectProfile>
     {
+        [MenuItem("CONTEXT/" + nameof(ScrollRect) + "/Control Using UI Style", isValidateFunction: true)]
+        public static bool AddApplierValidation(MenuCommand menuCommand)
+            => UIStyleApplierUtil.ContextMenuAddApplierValidation<UIStyleScrollRect>(menuCommand);
+
+        [MenuItem("CONTEXT/" + nameof(ScrollRect) + "/Control Using UI Style")]
+        public static void AddApplier(MenuCommand menuCommand)
+            => UIStyleApplierUtil.ContextMenuAddApplier<UIStyleScrollRect>(menuCommand);
+
         [InitializeOnLoadMethod]
         public static void OnAssemblyLoad()
         {

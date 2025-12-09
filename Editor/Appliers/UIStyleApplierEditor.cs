@@ -30,6 +30,30 @@ namespace JanSharp
             errorMsg = null;
             return roots[0];
         }
+
+        public static bool ContextMenuAddApplierValidation<T>(MenuCommand menuCommand)
+            where T : UIStyleApplier
+        {
+            Component target = (Component)menuCommand.context;
+            return !target.TryGetComponent<T>(out _);
+        }
+
+        public static void ContextMenuAddApplier<T>(MenuCommand menuCommand)
+            where T : UIStyleApplier
+        {
+            Component target = (Component)menuCommand.context;
+            T applier = target.gameObject.AddComponent<T>();
+            Undo.RegisterCreatedObjectUndo(applier, $"Add {typeof(T).Name}");
+
+            Component[] components = target.gameObject.GetComponents<Component>();
+            int targetIndex = System.Array.IndexOf(components, target);
+            int applierIndex = System.Array.IndexOf(components, applier);
+            if (targetIndex < 0 || applierIndex < 0)
+                throw new System.Exception("[UIStyling] Impossible.");
+
+            for (int i = 0; i < applierIndex - targetIndex - 1; i++)
+                UnityEditorInternal.ComponentUtility.MoveComponentUp(applier);
+        }
     }
 
     public abstract class UIStyleApplierEditor<T> : Editor

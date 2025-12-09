@@ -7,6 +7,14 @@ namespace JanSharp
     [CustomEditor(typeof(UIStyleTextMeshProUGUI))]
     public class UIStyleTextMeshProUGUIEditor : UIStyleApplierEditor<UIStyleTextMeshProUGUIProfile>
     {
+        [MenuItem("CONTEXT/" + nameof(TextMeshProUGUI) + "/Control Using UI Style", isValidateFunction: true)]
+        public static bool AddApplierValidation(MenuCommand menuCommand)
+            => UIStyleApplierUtil.ContextMenuAddApplierValidation<UIStyleTextMeshProUGUI>(menuCommand);
+
+        [MenuItem("CONTEXT/" + nameof(TextMeshProUGUI) + "/Control Using UI Style")]
+        public static void AddApplier(MenuCommand menuCommand)
+            => UIStyleApplierUtil.ContextMenuAddApplier<UIStyleTextMeshProUGUI>(menuCommand);
+
         [InitializeOnLoadMethod]
         public static void OnAssemblyLoad()
         {

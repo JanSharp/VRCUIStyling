@@ -7,6 +7,14 @@ namespace JanSharp
     [CustomEditor(typeof(UIStyleToggle))]
     public class UIStyleToggleEditor : UIStyleApplierEditor<UIStyleToggleProfile>
     {
+        [MenuItem("CONTEXT/" + nameof(Toggle) + "/Control Using UI Style", isValidateFunction: true)]
+        public static bool AddApplierValidation(MenuCommand menuCommand)
+            => UIStyleApplierUtil.ContextMenuAddApplierValidation<UIStyleToggle>(menuCommand);
+
+        [MenuItem("CONTEXT/" + nameof(Toggle) + "/Control Using UI Style")]
+        public static void AddApplier(MenuCommand menuCommand)
+            => UIStyleApplierUtil.ContextMenuAddApplier<UIStyleToggle>(menuCommand);
+
         [InitializeOnLoadMethod]
         public static void OnAssemblyLoad()
         {

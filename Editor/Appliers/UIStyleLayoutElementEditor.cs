@@ -7,6 +7,14 @@ namespace JanSharp
     [CustomEditor(typeof(UIStyleLayoutElement))]
     public class UIStyleLayoutElementEditor : UIStyleApplierEditor<UIStyleLayoutElementProfile>
     {
+        [MenuItem("CONTEXT/" + nameof(LayoutElement) + "/Control Using UI Style", isValidateFunction: true)]
+        public static bool AddApplierValidation(MenuCommand menuCommand)
+            => UIStyleApplierUtil.ContextMenuAddApplierValidation<UIStyleLayoutElement>(menuCommand);
+
+        [MenuItem("CONTEXT/" + nameof(LayoutElement) + "/Control Using UI Style")]
+        public static void AddApplier(MenuCommand menuCommand)
+            => UIStyleApplierUtil.ContextMenuAddApplier<UIStyleLayoutElement>(menuCommand);
+
         [InitializeOnLoadMethod]
         public static void OnAssemblyLoad()
         {

@@ -7,6 +7,14 @@ namespace JanSharp
     [CustomEditor(typeof(UIStyleScrollbar))]
     public class UIStyleScrollbarEditor : UIStyleApplierEditor<UIStyleScrollbarProfile>
     {
+        [MenuItem("CONTEXT/" + nameof(Scrollbar) + "/Control Using UI Style", isValidateFunction: true)]
+        public static bool AddApplierValidation(MenuCommand menuCommand)
+            => UIStyleApplierUtil.ContextMenuAddApplierValidation<UIStyleScrollbar>(menuCommand);
+
+        [MenuItem("CONTEXT/" + nameof(Scrollbar) + "/Control Using UI Style")]
+        public static void AddApplier(MenuCommand menuCommand)
+            => UIStyleApplierUtil.ContextMenuAddApplier<UIStyleScrollbar>(menuCommand);
+
         [InitializeOnLoadMethod]
         public static void OnAssemblyLoad()
         {

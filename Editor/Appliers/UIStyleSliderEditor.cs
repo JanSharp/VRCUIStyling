@@ -7,6 +7,14 @@ namespace JanSharp
     [CustomEditor(typeof(UIStyleSlider))]
     public class UIStyleSliderEditor : UIStyleApplierEditor<UIStyleSliderProfile>
     {
+        [MenuItem("CONTEXT/" + nameof(Slider) + "/Control Using UI Style", isValidateFunction: true)]
+        public static bool AddApplierValidation(MenuCommand menuCommand)
+            => UIStyleApplierUtil.ContextMenuAddApplierValidation<UIStyleSlider>(menuCommand);
+
+        [MenuItem("CONTEXT/" + nameof(Slider) + "/Control Using UI Style")]
+        public static void AddApplier(MenuCommand menuCommand)
+            => UIStyleApplierUtil.ContextMenuAddApplier<UIStyleSlider>(menuCommand);
+
         [InitializeOnLoadMethod]
         public static void OnAssemblyLoad()
         {
