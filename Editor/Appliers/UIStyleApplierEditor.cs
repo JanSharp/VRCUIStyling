@@ -67,6 +67,8 @@ namespace JanSharp
         private static HashSet<string> visitedNames = new();
         protected bool IsValid => errorMsg == null;
         private bool controlsFoldedOut = false;
+        private int successfulApplicationCount = 0;
+        private List<UIStyleRoot> rootsWithValidationErrors;
 
         public void OnEnable()
         {
@@ -126,6 +128,10 @@ namespace JanSharp
             serializedObject.Update();
             UIStyleProfileUtil.DrawSelectorField(profileNameProp, !IsValid, profileNames);
             EditorGUILayout.Space();
+            if (GUILayout.Button("Apply Style"))
+                ApplyStyleForAll();
+            DrawSuccessInfoBox();
+            EditorGUILayout.Space();
             if (controlsFoldedOut = EditorGUILayout.Foldout(controlsFoldedOut, "Controls", toggleOnLabelClick: true))
                 DrawControls();
             serializedObject.ApplyModifiedProperties();
@@ -146,6 +152,42 @@ namespace JanSharp
             Rect rect = EditorGUILayout.GetControlRect(hasLabel: true);
             using (new EditorGUI.PropertyScope(rect, label: null, prop))
                 prop.boolValue = EditorGUI.ToggleLeft(rect, new GUIContent(prop.displayName), prop.boolValue);
+        }
+
+        private void ApplyStyleForAll()
+        {
+            successfulApplicationCount = UIStyleRootEditor.ApplyStylesForAll(
+                targets.Cast<UIStyleApplier>(),
+                out rootsWithValidationErrors);
+        }
+
+        private void DrawSuccessInfoBox()
+        {
+            if (rootsWithValidationErrors == null)
+                return;
+            using (new GUILayout.VerticalScope(EditorStyles.helpBox))
+                if (targets.Length == successfulApplicationCount)
+                    GUILayout.Label("Successfully applied UI Style!", EditorStyles.wordWrappedLabel);
+                else
+                {
+                    if (successfulApplicationCount == 0)
+                        GUILayout.Label($"Failed to apply UI Style", EditorStyles.wordWrappedLabel);
+                    else
+                        GUILayout.Label($"Successfully applied UI Style for "
+                            + $"{successfulApplicationCount}/{targets.Length}", EditorStyles.wordWrappedLabel);
+
+                    if (rootsWithValidationErrors.Count == 0)
+                        GUILayout.Label($"See Console log for errors", EditorStyles.wordWrappedLabel);
+                    else
+                    {
+                        GUILayout.Label($"See Console log or UI Style {(rootsWithValidationErrors.Count == 1 ? "Root" : "Roots")} "
+                            + "for validation errors:", EditorStyles.wordWrappedLabel);
+                        foreach (UIStyleRoot root in rootsWithValidationErrors)
+                            EditorGUILayout.ObjectField(root, typeof(UIStyleRoot), allowSceneObjects: true);
+
+                    }
+
+                }
         }
     }
 }

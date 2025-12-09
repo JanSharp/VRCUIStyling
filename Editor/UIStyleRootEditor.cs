@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 namespace JanSharp
 {
@@ -49,7 +48,7 @@ namespace JanSharp
             return result;
         }
 
-        private static bool ValidateApplier(ValidationContext context, UIStyleApplier applier)
+        public static bool ValidateApplier(ValidationContext context, UIStyleApplier applier)
         {
             bool result = true;
 
@@ -157,34 +156,85 @@ namespace JanSharp
 
         private void ApplyStylesForAll()
         {
-            successfulApplicationCount = 0;
             invalidContextsAreStale = false;
-            invalidContexts.Clear();
-            foreach (UIStyleRoot root in targets.Cast<UIStyleRoot>())
-                if (root.profileContainer != null)
-                    ApplyStyle(root);
+            successfulApplicationCount = ApplyStylesForAll(targets.Cast<UIStyleRoot>());
         }
 
-        private void ApplyStyle(UIStyleRoot root)
+        public static int ApplyStylesForAll(IEnumerable<UIStyleRoot> roots)
+        {
+            int successCount = 0;
+            invalidContexts.Clear();
+            foreach (UIStyleRoot root in roots)
+                if (root.profileContainer != null)
+                    if (ApplyStyle(root))
+                        successCount++;
+            return successCount;
+        }
+
+        public static int ApplyStylesForAll(IEnumerable<UIStyleApplier> appliers, out List<UIStyleRoot> rootsWithValidationErrors)
+        {
+            int successCount = 0;
+            invalidContexts.Clear();
+            foreach (var group in appliers.GroupBy(a => a.GetComponentInParent<UIStyleRoot>(includeInactive: true)))
+                if (group.Key != null)
+                    successCount += ApplyStyle(group.Key, group);
+                else
+                    foreach (UIStyleApplier applier in group)
+                        Debug.LogError($"[UIStyling] Missing UI Style Root anywhere up the hierarchy "
+                            + $"(parents) for {applier.name}.", applier);
+            rootsWithValidationErrors = invalidContexts.Select(c => c.root).ToList();
+            return successCount;
+        }
+
+        private static int ApplyStyle(UIStyleRoot root, IEnumerable<UIStyleApplier> limitedSetOfAppliers)
+        {
+            ValidationContext context = new(root);
+
+            if (!UIStyleProfileContainerUtil.Validate(context))
+            {
+                RememberInvalidContext(root, context);
+                return 0;
+            }
+
+            int successCount = 0;
+            foreach (var applier in limitedSetOfAppliers)
+            {
+                if (!UIStyleRootUtil.ValidateApplier(context, applier))
+                    continue;
+                successCount++;
+                UIStyleRootUtil.ApplyStyle(context, applier);
+            }
+
+            if (context.validationErrors.Count != 0)
+                RememberInvalidContext(root, context);
+            return successCount;
+        }
+
+        private static bool ApplyStyle(UIStyleRoot root)
         {
             ValidationContext context = new(root);
 
             if (!UIStyleRootUtil.Validate(context))
             {
-                invalidContexts.Add((root, context));
-                bool single = context.validationErrors.Count == 1;
-                Debug.Log($"[UIStyling] Begin of {context.validationErrors.Count} validation {(single ? "error" : "errors")} "
-                    + $"for {root.name} (this message just helps visually split the log).", root);
-                foreach (ValidationError error in context.validationErrors)
-                    error.Log();
-                Debug.LogError($"[UIStyling] There {(single ? "is" : "are")} {context.validationErrors.Count} "
-                    + $"validation {(single ? "error" : "errors")} for {root.name}, see above.", root);
-                return;
+                RememberInvalidContext(root, context);
+                return false;
             }
 
-            successfulApplicationCount++;
             foreach (UIStyleApplier applier in context.appliers)
                 UIStyleRootUtil.ApplyStyle(context, applier);
+            return true;
+        }
+
+        private static void RememberInvalidContext(UIStyleRoot root, ValidationContext context)
+        {
+            invalidContexts.Add((root, context));
+            bool single = context.validationErrors.Count == 1;
+            Debug.Log($"[UIStyling] Begin of {context.validationErrors.Count} validation {(single ? "error" : "errors")} "
+                + $"for {root.name} (this message just helps visually split the log).", root);
+            foreach (ValidationError error in context.validationErrors)
+                error.Log();
+            Debug.LogError($"[UIStyling] There {(single ? "is" : "are")} {context.validationErrors.Count} "
+                + $"validation {(single ? "error" : "errors")} for {root.name}, see above.", root);
         }
 
         private void DrawSuccessInfoBox()
