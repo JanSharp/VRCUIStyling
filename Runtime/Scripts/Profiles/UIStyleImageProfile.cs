@@ -67,8 +67,10 @@ namespace JanSharp
 #if UNITY_EDITOR
         private void Reset()
         {
-            material = AssetDatabase.LoadAssetAtPath<Material>(
-                AssetDatabase.GUIDToAssetPath("35630e38b4e5ffb40b44ec5348b4333f"));
+            string guid = AssetDatabase.GUIDToAssetPath("35630e38b4e5ffb40b44ec5348b4333f");
+            if (guid == "")
+                return;
+            material = AssetDatabase.LoadAssetAtPath<Material>(guid);
         }
 #endif
     }
