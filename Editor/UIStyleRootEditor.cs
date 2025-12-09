@@ -12,7 +12,7 @@ namespace JanSharp
     {
         private static Dictionary<System.Type, System.Type> associatedProfileTypeByApplierType = new();
         private static Dictionary<System.Type, System.Type> associatedComponentTypeByApplierType = new();
-        private static Dictionary<System.Type, System.Action<ValidationContext, UIStyleApplier, UIStyleProfile, UIBehaviour>> applyStyleFuncByType = new();
+        private static Dictionary<System.Type, System.Action<ValidationContext, UIStyleApplier, UIStyleProfile, Component>> applyStyleFuncByType = new();
 
         static UIStyleRootUtil()
         {
@@ -23,7 +23,7 @@ namespace JanSharp
             System.Action<ValidationContext, TApplier, TProfile, TUIComponent> applyStyle)
             where TApplier : UIStyleApplier
             where TProfile : UIStyleProfile
-            where TUIComponent : UIBehaviour
+            where TUIComponent : Component
         {
             associatedProfileTypeByApplierType.Add(typeof(TApplier), typeof(TProfile));
             associatedComponentTypeByApplierType.Add(typeof(TApplier), typeof(TUIComponent));
@@ -96,7 +96,7 @@ namespace JanSharp
                 return;
             }
 
-            UIBehaviour target = (UIBehaviour)applier.GetComponent(targetType);
+            Component target = applier.GetComponent(targetType);
             if (target == null)
             {
                 Debug.LogError($"[UIStyling] The associated {targetType.Name} component for the {applierType.Name} on "
