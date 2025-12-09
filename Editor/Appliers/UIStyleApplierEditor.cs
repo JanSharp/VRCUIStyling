@@ -66,6 +66,7 @@ namespace JanSharp
         private string[] profileNames = new string[] { "" };
         private static HashSet<string> visitedNames = new();
         protected bool IsValid => errorMsg == null;
+        private bool controlsFoldedOut = false;
 
         public void OnEnable()
         {
@@ -125,8 +126,26 @@ namespace JanSharp
             serializedObject.Update();
             UIStyleProfileUtil.DrawSelectorField(profileNameProp, !IsValid, profileNames);
             EditorGUILayout.Space();
-            DrawPropertiesExcluding(serializedObject, "m_Script", nameof(UIStyleApplier.profileName));
+            if (controlsFoldedOut = EditorGUILayout.Foldout(controlsFoldedOut, "Controls", toggleOnLabelClick: true))
+                DrawControls();
             serializedObject.ApplyModifiedProperties();
+        }
+
+        private void DrawControls()
+        {
+            SerializedProperty iter = serializedObject.GetIterator();
+            if (iter.NextVisible(true))
+                do
+                    if (iter.name != "m_Script" && iter.name != nameof(UIStyleApplier.profileName))
+                        DrawControl(iter);
+                while (iter.NextVisible(false));
+        }
+
+        private void DrawControl(SerializedProperty prop)
+        {
+            Rect rect = EditorGUILayout.GetControlRect(hasLabel: true);
+            using (new EditorGUI.PropertyScope(rect, label: null, prop))
+                prop.boolValue = EditorGUI.ToggleLeft(rect, new GUIContent(prop.displayName), prop.boolValue);
         }
     }
 }

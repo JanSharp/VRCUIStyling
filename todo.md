@@ -16,7 +16,7 @@
 - [x] scrollbar
 - [x] slider
 - [ ] maybe tmp dropdown
-- [ ] make all the applier inspectors use a collapsed scope for all the control checkboxes
+- [x] make all the applier inspectors use a collapsed scope for all the control checkboxes
 - [x] ~~use VRC Default button for image material~~ use the VRC material by default using the Reset event
 - [x] context buttons for all ui components to add their respective applier
 - [ ] apply style button for each individual applier
