@@ -22,7 +22,7 @@ namespace JanSharp
         public float caretBlinkRate = 0.85f;
         [Range(1, 5)]
         public int caretWidth = 1;
-        public bool customCaretColor = true;
+        public bool customCaretColor = false;
         public string caretColor;
         public string selectionColor;
         public bool onFocusSelectAll = true;
