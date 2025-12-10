@@ -16,6 +16,8 @@
 - [x] scrollbar
 - [x] slider
 - [ ] maybe tmp dropdown
+- [ ] rect 2d mask
+- [ ] maybe content size fitter
 - [x] make all the applier inspectors use a collapsed scope for all the control checkboxes
 - [x] ~~use VRC Default button for image material~~ use the VRC material by default using the Reset event
 - [x] context buttons for all ui components to add their respective applier
@@ -23,3 +25,4 @@
 - [ ] maybe add a validation error for leading or trailing white space for profile names for appliers
 - [ ] make the image profile inspector hide fields based on what type is selected
 - [ ] make the selectable profile inspector hide fields based on what type is selected
+- [ ] do not completely disable the text field for appliers when the root is missing or the profile container is missing
