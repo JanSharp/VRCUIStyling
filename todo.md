@@ -26,3 +26,4 @@
 - [ ] make the image profile inspector hide fields based on what type is selected
 - [ ] make the selectable profile inspector hide fields based on what type is selected
 - [ ] do not completely disable the text field for appliers when the root is missing or the profile container is missing
+- [ ] selectable profile name selector shows deriving classes, however that doesn't actually work currently. Either make that work or only show selectable profiles
