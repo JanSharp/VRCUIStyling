@@ -184,9 +184,7 @@ namespace JanSharp
                             + "for validation errors:", EditorStyles.wordWrappedLabel);
                         foreach (UIStyleRoot root in rootsWithValidationErrors)
                             EditorGUILayout.ObjectField(root, typeof(UIStyleRoot), allowSceneObjects: true);
-
                     }
-
                 }
         }
     }
