@@ -35,15 +35,16 @@ namespace JanSharp
                 throw new System.Exception("Don't make me add another type of validation error for this, "
                     + "just don't even bother validating at this point. Please.");
 
+            bool result = UIStyleCustomColorAndSpriteRefs.ValidateAttributes(context);
+
             if (!UIStyleProfileContainerUtil.Validate(context))
                 return false; // Cannot validate the root and its appliers with invalid profiles.
 
-            bool result = true;
+            result &= UIStyleCustomColorAndSpriteRefs.ValidateInstances(context);
 
             context.appliers = context.root.GetComponentsInChildren<UIStyleApplier>(includeInactive: true);
             foreach (UIStyleApplier applier in context.appliers)
-                if (!ValidateApplier(context, applier))
-                    result = false;
+                result &= ValidateApplier(context, applier);
 
             return result;
         }
@@ -173,15 +174,29 @@ namespace JanSharp
 
         public static int ApplyStylesForAll(IEnumerable<UIStyleApplier> appliers, out List<UIStyleRoot> rootsWithValidationErrors)
         {
+            return ApplyStyleGeneric(appliers, ApplyStyle, out rootsWithValidationErrors);
+        }
+
+        public static int ApplyStylesForAll(IEnumerable<Component> customScripts, out List<UIStyleRoot> rootsWithValidationErrors)
+        {
+            return ApplyStyleGeneric(customScripts, ApplyStyle, out rootsWithValidationErrors);
+        }
+
+        private static int ApplyStyleGeneric<T>(
+            IEnumerable<T> toApplyTo,
+            System.Func<UIStyleRoot, IEnumerable<T>, int> applyStyle,
+            out List<UIStyleRoot> rootsWithValidationErrors)
+            where T : Component
+        {
             int successCount = 0;
             invalidContexts.Clear();
-            foreach (var group in appliers.GroupBy(a => a.GetComponentInParent<UIStyleRoot>(includeInactive: true)))
+            foreach (var group in toApplyTo.GroupBy(c => c.GetComponentInParent<UIStyleRoot>(includeInactive: true)))
                 if (group.Key != null)
-                    successCount += ApplyStyle(group.Key, group);
+                    successCount += applyStyle(group.Key, group);
                 else
-                    foreach (UIStyleApplier applier in group)
+                    foreach (T component in group)
                         Debug.LogError($"[UIStyling] Missing UI Style Root anywhere up the hierarchy "
-                            + $"(parents) for {applier.name}.", applier);
+                            + $"(parents) for {component.name}.", component);
             rootsWithValidationErrors = invalidContexts.Select(c => c.root).ToList();
             return successCount;
         }
@@ -210,6 +225,31 @@ namespace JanSharp
             return successCount;
         }
 
+        private static int ApplyStyle(UIStyleRoot root, IEnumerable<Component> limitedSetOfCustomScripts)
+        {
+            ValidationContext context = new(root);
+
+            // Intentional | instead of ||. Want to run the second validation function anyway even if the first one failed.
+            if (!UIStyleCustomColorAndSpriteRefs.ValidateAttributes(context) | !UIStyleProfileContainerUtil.Validate(context))
+            {
+                RememberInvalidContext(root, context);
+                return 0;
+            }
+
+            int successCount = 0;
+            foreach (var customScript in limitedSetOfCustomScripts)
+            {
+                if (!UIStyleCustomColorAndSpriteRefs.ValidateCustomScript(context, customScript))
+                    continue;
+                successCount++;
+                UIStyleCustomColorAndSpriteRefs.ApplyStyle(context, customScript);
+            }
+
+            if (context.validationErrors.Count != 0)
+                RememberInvalidContext(root, context);
+            return successCount;
+        }
+
         private static bool ApplyStyle(UIStyleRoot root)
         {
             ValidationContext context = new(root);
@@ -220,6 +260,7 @@ namespace JanSharp
                 return false;
             }
 
+            UIStyleCustomColorAndSpriteRefs.ApplyStyle(context);
             foreach (UIStyleApplier applier in context.appliers)
                 UIStyleRootUtil.ApplyStyle(context, applier);
             return true;

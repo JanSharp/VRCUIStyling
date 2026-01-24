@@ -7,28 +7,30 @@ namespace JanSharp
 {
     public static class UIStyleApplierUtil
     {
-        public static UIStyleRoot GetRoot(IEnumerable<UIStyleApplier> targets, out string errorMsg)
+        public static bool TryGetRoot(IEnumerable<UIStyleApplier> targets, out UIStyleRoot root, out string errorMsg)
         {
+            root = null;
             UIStyleRoot[] roots = targets
                 .Select(p => p.GetComponentInParent<UIStyleRoot>(includeInactive: true))
                 .ToArray();
             if (roots.All(c => c == null))
             {
                 errorMsg = "Missing UI Style Root in parents.";
-                return null;
+                return false;
             }
             if (roots.Any(c => c == null))
             {
                 errorMsg = "Some selected objects are not a child of any UI Style Root.";
-                return null;
+                return false;
             }
             if (roots.Distinct().Count() != 1)
             {
                 errorMsg = "Selected objects are children of different UI Style Roots.";
-                return null;
+                return false;
             }
+            root = roots[0];
             errorMsg = null;
-            return roots[0];
+            return true;
         }
 
         public static bool ContextMenuAddApplierValidation<T>(MenuCommand menuCommand)
@@ -74,21 +76,15 @@ namespace JanSharp
         {
             profileNameProp = serializedObject.FindProperty(nameof(UIStyleApplier.profileName));
 
-            if (!GetRoot())
+            if (!UIStyleApplierUtil.TryGetRoot(targets.Cast<UIStyleApplier>(), out root, out errorMsg))
                 return;
-            if (!GetContainer())
+            if (!TryGetContainer())
                 return;
-            if (!GetProfileNames())
+            if (!TryGetProfileNames())
                 return;
         }
 
-        private bool GetRoot()
-        {
-            root = UIStyleApplierUtil.GetRoot(targets.Cast<UIStyleApplier>(), out errorMsg);
-            return root != null;
-        }
-
-        private bool GetContainer()
+        private bool TryGetContainer()
         {
             container = root.profileContainer;
             if (container == null)
@@ -99,7 +95,7 @@ namespace JanSharp
             return true;
         }
 
-        private bool GetProfileNames()
+        private bool TryGetProfileNames()
         {
             List<string> profileNamesList = new() { "" };
             foreach (UIStyleProfile profile in container.GetComponentsInChildren<T>(includeInactive: true))
@@ -126,7 +122,7 @@ namespace JanSharp
                 EditorGUILayout.Space();
             }
             serializedObject.Update();
-            UIStyleProfileUtil.DrawSelectorField(profileNameProp, !IsValid, profileNames);
+            UIStyleProfileUtil.DrawSelectorFieldLayout(profileNameProp, !IsValid, profileNames);
             EditorGUILayout.Space();
             if (GUILayout.Button("Apply Style"))
                 ApplyStyleForAll();

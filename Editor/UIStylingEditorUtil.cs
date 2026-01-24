@@ -284,6 +284,76 @@ namespace JanSharp
         }
     }
 
+    public class LeadingTrailingWhiteSpaceCustomColorSpriteReferenceError : ValidationError
+    {
+        public Component customScript;
+        public System.Type customScriptType;
+        public string fieldName;
+        public string colorSpriteName;
+        public bool isSprite;
+
+        public LeadingTrailingWhiteSpaceCustomColorSpriteReferenceError(
+            Component profile,
+            string fieldName,
+            string colorSpriteName,
+            bool isSprite)
+        {
+            this.customScript = profile;
+            // The profiles could get deleted, prefetch these.
+            customScriptType = profile.GetType();
+            this.fieldName = fieldName;
+            this.colorSpriteName = colorSpriteName;
+            this.isSprite = isSprite;
+        }
+
+        private string GetErrorMessage() => $"For the custom script {customScriptType.Name}, the "
+            + $"{fieldName} is trying to reference a {(isSprite ? "Sprite" : "Color")} by the name '{colorSpriteName}' "
+            + $"which has leading and or trailing white space which is invalid.";
+
+        public override void Log() => Debug.LogError($"[UIStyling] {GetErrorMessage()}", customScript);
+
+        public override void Draw()
+        {
+            GUILayout.Label(GetErrorMessage(), EditorStyles.wordWrappedLabel);
+            EditorGUILayout.ObjectField("Custom Script In Question", customScript, customScriptType, allowSceneObjects: true);
+        }
+    }
+
+    public class InvalidCustomColorSpriteReferenceError : ValidationError
+    {
+        public Component customScript;
+        public System.Type customScriptType;
+        public string fieldName;
+        public string colorSpriteName;
+        public bool isSprite;
+
+        public InvalidCustomColorSpriteReferenceError(
+            Component customScript,
+            string fieldName,
+            string colorSpriteName,
+            bool isSprite)
+        {
+            this.customScript = customScript;
+            // The customScript could get deleted, prefetch this.
+            customScriptType = customScript.GetType();
+            this.fieldName = fieldName;
+            this.colorSpriteName = colorSpriteName;
+            this.isSprite = isSprite;
+        }
+
+        private string GetErrorMessage() => $"For the custom script {customScriptType.Name}, the "
+            + $"{fieldName} is trying to reference a {(isSprite ? "Sprite" : "Color")} by the name '{colorSpriteName}' "
+            + $"however the UI Style {(isSprite ? "Sprite" : "Color")} Pallet does not define any with such a name.";
+
+        public override void Log() => Debug.LogError($"[UIStyling] {GetErrorMessage()}", customScript);
+
+        public override void Draw()
+        {
+            GUILayout.Label(GetErrorMessage(), EditorStyles.wordWrappedLabel);
+            EditorGUILayout.ObjectField("Custom Script In Question", customScript, customScriptType, allowSceneObjects: true);
+        }
+    }
+
     public class EmptyProfileNameForApplierError : ValidationError
     {
         public UIStyleApplier applier;
@@ -399,6 +469,19 @@ namespace JanSharp
         {
             GUILayout.Label(GetErrorMessage(), EditorStyles.wordWrappedLabel);
             EditorGUILayout.ObjectField("Applier In Question", applier, applierType, allowSceneObjects: true);
+        }
+    }
+
+    public class InvalidAttributesError : ValidationError
+    {
+        public InvalidAttributesError() { }
+
+        public override void Log() { }
+
+        public override void Draw()
+        {
+            GUILayout.Label("Some UIStyleColor and or UIStyleSprite attributes in custom scripts are invalid, "
+                + "check the console for details.", EditorStyles.wordWrappedLabel);
         }
     }
 }

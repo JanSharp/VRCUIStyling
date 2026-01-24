@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
@@ -149,6 +150,67 @@ namespace JanSharp
                         continue;
                     }
                 }
+
+            return result;
+        }
+
+        public static bool ValidateCustomScript(ValidationContext context, UIStyleCustomScriptCache cached, Component customScript)
+        {
+            bool result = true;
+
+            System.Type customScriptType = customScript.GetType();
+
+            foreach (var pair in cached.colorFieldPairs)
+            {
+                string colorName = (string)customScriptType.GetField(pair.nameFieldName).GetValue(customScript);
+                pair.nameFieldValue = colorName;
+                if (UIStylingEditorUtil.HasLeadingTrailingWhitespace(colorName))
+                {
+                    result = false;
+                    context.AddValidationError(new LeadingTrailingWhiteSpaceCustomColorSpriteReferenceError(
+                        customScript,
+                        pair.nameFieldName,
+                        colorName,
+                        isSprite: false));
+                    continue;
+                }
+                if (!context.colorsByName.ContainsKey(colorName))
+                {
+                    result = false;
+                    context.AddValidationError(new InvalidCustomColorSpriteReferenceError(
+                        customScript,
+                        pair.nameFieldName,
+                        colorName,
+                        isSprite: false));
+                    continue;
+                }
+            }
+
+            foreach (var pair in cached.spriteFieldPairs)
+            {
+                string spriteName = (string)customScriptType.GetField(pair.nameFieldName).GetValue(customScript);
+                pair.nameFieldValue = spriteName;
+                if (UIStylingEditorUtil.HasLeadingTrailingWhitespace(spriteName))
+                {
+                    result = false;
+                    context.AddValidationError(new LeadingTrailingWhiteSpaceCustomColorSpriteReferenceError(
+                        customScript,
+                        pair.nameFieldName,
+                        spriteName,
+                        isSprite: true));
+                    continue;
+                }
+                if (!context.spritesByName.ContainsKey(spriteName))
+                {
+                    result = false;
+                    context.AddValidationError(new InvalidCustomColorSpriteReferenceError(
+                        customScript,
+                        pair.nameFieldName,
+                        spriteName,
+                        isSprite: true));
+                    continue;
+                }
+            }
 
             return result;
         }
