@@ -165,7 +165,7 @@ namespace JanSharp
         private static void FindAllInstancesToApplyTo(ValidationContext context)
         {
             foreach (UIStyleCustomScriptCache cached in ubTypeCache)
-                cached.instancesToApplyTo = context.root.GetComponentsInChildren(cached.ubType);
+                cached.instancesToApplyTo = context.root.GetComponentsInChildren(cached.ubType, includeInactive: true);
         }
 
         public static void ApplyStyle(ValidationContext context)
