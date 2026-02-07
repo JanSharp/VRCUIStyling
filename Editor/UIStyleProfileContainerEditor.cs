@@ -102,7 +102,7 @@ namespace JanSharp
             if (colorFieldsByType.TryGetValue(profileType, out string[] fieldNames))
                 foreach (string fieldName in fieldNames)
                 {
-                    string colorName = (string)profileType.GetField(fieldName).GetValue(profile);
+                    string colorName = (string)profileType.GetField(fieldName).GetValue(profile) ?? "";
                     if (UIStylingEditorUtil.HasLeadingTrailingWhitespace(colorName))
                     {
                         result = false;
@@ -128,7 +128,7 @@ namespace JanSharp
             if (spriteFieldsByType.TryGetValue(profileType, out fieldNames))
                 foreach (string fieldName in fieldNames)
                 {
-                    string spriteName = (string)profileType.GetField(fieldName).GetValue(profile);
+                    string spriteName = (string)profileType.GetField(fieldName).GetValue(profile) ?? "";
                     if (UIStylingEditorUtil.HasLeadingTrailingWhitespace(spriteName))
                     {
                         result = false;
@@ -162,7 +162,7 @@ namespace JanSharp
 
             foreach (var pair in cached.colorFieldPairs)
             {
-                string colorName = (string)customScriptType.GetField(pair.nameFieldName).GetValue(customScript);
+                string colorName = (string)customScriptType.GetField(pair.nameFieldName).GetValue(customScript) ?? "";
                 pair.nameFieldValue = colorName;
                 if (UIStylingEditorUtil.HasLeadingTrailingWhitespace(colorName))
                 {
@@ -188,7 +188,7 @@ namespace JanSharp
 
             foreach (var pair in cached.spriteFieldPairs)
             {
-                string spriteName = (string)customScriptType.GetField(pair.nameFieldName).GetValue(customScript);
+                string spriteName = (string)customScriptType.GetField(pair.nameFieldName).GetValue(customScript) ?? "";
                 pair.nameFieldValue = spriteName;
                 if (UIStylingEditorUtil.HasLeadingTrailingWhitespace(spriteName))
                 {

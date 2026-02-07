@@ -10,7 +10,7 @@ namespace JanSharp
         public static bool IsEmptyName(string name) => string.IsNullOrEmpty(name);
         public static bool HasLeadingTrailingWhitespace(string name) => name.Trim().Length != name.Length;
         public static bool HasEmptyProfileName(UIStyleProfile profile) => IsEmptyName(profile.profileName);
-        public static bool HasLeadingTrailingWhitespace(UIStyleProfile profile) => HasLeadingTrailingWhitespace(profile.profileName);
+        public static bool HasLeadingTrailingWhitespace(UIStyleProfile profile) => HasLeadingTrailingWhitespace(profile.profileName ?? "");
     }
 
     public class ValidationContext
