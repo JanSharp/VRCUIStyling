@@ -62,8 +62,8 @@ namespace JanSharp
 
             foreach (FieldInfo field in EditorUtil.GetFieldsIncludingBase(ubType, PrivateAndPublicFlags, stopAtType: typeof(UdonSharpBehaviour)))
             {
-                isValid &= CheckForAttribute<UIStyleColorAttribute, Color>(ubType, field, cached.colorFieldPairs, a => a.ColorFieldName, validateOnly);
-                isValid &= CheckForAttribute<UIStyleSpriteAttribute, Sprite>(ubType, field, cached.spriteFieldPairs, a => a.SpriteFieldName, validateOnly);
+                isValid &= CheckForAttribute<UIStyleColorAttribute, Color>(ubType, field, cached?.colorFieldPairs, a => a.ColorFieldName, validateOnly);
+                isValid &= CheckForAttribute<UIStyleSpriteAttribute, Sprite>(ubType, field, cached?.spriteFieldPairs, a => a.SpriteFieldName, validateOnly);
             }
 
             if (validateOnly)
