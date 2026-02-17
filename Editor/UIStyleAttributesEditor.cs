@@ -117,7 +117,7 @@ namespace JanSharp
                     + $"pointing to a {typeof(TAssociated).Name} field by the name '{associatedFieldName}' however no such field exists.");
                 isValid = false;
             }
-            if (defField != null && defField.FieldType != typeof(Color))
+            if (defField != null && defField.FieldType != typeof(TAssociated))
             {
                 Debug.LogError($"[UIStyling] The {ubType.Name}.{field.Name} field has the {typeof(TAttribute).Name} "
                     + $"pointing to the field by the name '{associatedFieldName}' which has the type {defField.FieldType.Name}, "
