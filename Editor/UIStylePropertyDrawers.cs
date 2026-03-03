@@ -10,7 +10,7 @@ namespace JanSharp
         private bool isInitialized = false;
         private string errorMsg = null;
         private UIStyleProfileContainer container = null;
-        private string[] colorNames = new string[] { "" };
+        private string[] colorNames = new string[] { };
 
         private void Initialize(SerializedProperty property)
         {
@@ -41,7 +41,7 @@ namespace JanSharp
         private bool isInitialized = false;
         private string errorMsg = null;
         private UIStyleProfileContainer container = null;
-        private string[] spriteNames = new string[] { "" };
+        private string[] spriteNames = new string[] { };
 
         private void Initialize(SerializedProperty property)
         {

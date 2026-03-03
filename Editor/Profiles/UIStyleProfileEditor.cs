@@ -66,11 +66,10 @@ namespace JanSharp
             if (colors == null)
             {
                 errorMsg = "The UI Style Profile Container is missing its UI Style Color Pallet.";
-                colorNames = new string[] { "" };
+                colorNames = new string[] { };
                 return false;
             }
-            colorNames = new string[colors.Length + 1];
-            colorNames[0] = "";
+            colorNames = new string[colors.Length];
             HashSet<string> visitedNames = new();
             for (int i = 0; i < colors.Length; i++)
             {
@@ -81,7 +80,7 @@ namespace JanSharp
                     errorMsg = "Color Pallet contains duplicate names.";
                     return false;
                 }
-                colorNames[i + 1] = color.name;
+                colorNames[i] = color.name;
             }
             errorMsg = null;
             return true;
@@ -93,11 +92,10 @@ namespace JanSharp
             if (sprites == null)
             {
                 errorMsg = "The UI Style Profile Container is missing its UI Style Sprite Pallet.";
-                spriteNames = new string[] { "" };
+                spriteNames = new string[] { };
                 return false;
             }
-            spriteNames = new string[sprites.Length + 1];
-            spriteNames[0] = "";
+            spriteNames = new string[sprites.Length];
             HashSet<string> visitedNames = new();
             for (int i = 0; i < sprites.Length; i++)
             {
@@ -108,7 +106,7 @@ namespace JanSharp
                     errorMsg = "Sprite Pallet contains duplicate names.";
                     return false;
                 }
-                spriteNames[i + 1] = sprite.name;
+                spriteNames[i] = sprite.name;
             }
             errorMsg = null;
             return true;
@@ -127,9 +125,10 @@ namespace JanSharp
                 drawProp(prop);
                 using (new EditorGUI.DisabledScope(disabled))
                 {
-                    int index = EditorGUILayout.Popup(0, names, GUILayout.Width(20f));
-                    if (index != 0)
-                        prop.stringValue = names[index];
+                    int index = System.Array.IndexOf(names, prop.stringValue);
+                    int newIndex = EditorGUILayout.Popup(index, names, GUILayout.Width(20f));
+                    if (newIndex != index)
+                        prop.stringValue = names[newIndex];
                 }
             }
         }
@@ -148,9 +147,10 @@ namespace JanSharp
             rect.width = 20f;
             rect.x += width - rect.width - 2f - 50f;
             EditorGUI.BeginDisabledGroup(errorMsg != null);
-            int index = EditorGUI.Popup(rect, 0, names);
-            if (index != 0)
-                prop.stringValue = names[index];
+            int index = System.Array.IndexOf(names, prop.stringValue);
+            int newIndex = EditorGUI.Popup(rect, index, names);
+            if (newIndex != index)
+                prop.stringValue = names[newIndex];
             rect.width = 50f;
             rect.x += 2f + 20f;
             if (GUI.Button(rect, new GUIContent("Apply", errorMsg)))
@@ -167,8 +167,8 @@ namespace JanSharp
 
         protected UIStyleProfileContainer container;
         protected string errorMsg;
-        protected string[] colorNames = new string[] { "" };
-        protected string[] spriteNames = new string[] { "" };
+        protected string[] colorNames = new string[] { };
+        protected string[] spriteNames = new string[] { };
         protected bool IsValid => errorMsg == null;
 
         public virtual void OnEnable()

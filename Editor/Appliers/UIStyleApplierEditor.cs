@@ -65,7 +65,7 @@ namespace JanSharp
         private UIStyleProfileContainer container;
         private string errorMsg;
         private SerializedProperty profileNameProp;
-        private string[] profileNames = new string[] { "" };
+        private string[] profileNames = new string[] { };
         private static HashSet<string> visitedNames = new();
         protected bool IsValid => errorMsg == null;
         private bool controlsFoldedOut = false;
@@ -97,7 +97,7 @@ namespace JanSharp
 
         private bool TryGetProfileNames()
         {
-            List<string> profileNamesList = new() { "" };
+            List<string> profileNamesList = new() { };
             foreach (UIStyleProfile profile in container.GetComponentsInChildren<T>(includeInactive: true))
             {
                 if (!UIStyleProfileContainerUtil.IsProfileActive(profile))
