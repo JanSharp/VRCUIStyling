@@ -26,5 +26,5 @@
 - [ ] make the image profile inspector hide fields based on what type is selected
 - [ ] make the selectable profile inspector hide fields based on what type is selected
 - [x] do not completely disable the text field for appliers when the root is missing or the profile container is missing
-- [ ] selectable profile name selector shows deriving classes, however that doesn't actually work currently. Either make that work or only show selectable profiles
+- [x] selectable profile name selector shows deriving classes, however that doesn't actually work currently. Either make that work or only show selectable profiles
 - [ ] maybe add support for legacy Unity text, because there is a reason to use that when making HUD, since it's a lot easier to get that to render over geometry compared to text mesh pro

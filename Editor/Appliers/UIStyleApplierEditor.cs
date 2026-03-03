@@ -100,6 +100,8 @@ namespace JanSharp
             List<string> profileNamesList = new() { };
             foreach (UIStyleProfile profile in container.GetComponentsInChildren<T>(includeInactive: true))
             {
+                if (profile.GetType() != typeof(T)) // Do not include deriving classes.
+                    continue;
                 if (!UIStyleProfileContainerUtil.IsProfileActive(profile))
                     continue;
                 if (UIStylingEditorUtil.HasEmptyProfileName(profile) || UIStylingEditorUtil.HasLeadingTrailingWhitespace(profile))
