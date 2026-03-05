@@ -53,8 +53,12 @@ namespace JanSharp
             if (targetIndex < 0 || applierIndex < 0)
                 throw new System.Exception("[UIStyling] Impossible.");
 
-            for (int i = 0; i < applierIndex - targetIndex - 1; i++)
-                UnityEditorInternal.ComponentUtility.MoveComponentUp(applier);
+            for (int i = applierIndex - 1; i > targetIndex; i--)
+                if (components[i] == null // A missing script, very most likely if not guaranteed to be shown in inspector.
+                    || (components[i].hideFlags & HideFlags.HideInInspector) == 0)
+                {
+                    UnityEditorInternal.ComponentUtility.MoveComponentUp(applier);
+                }
         }
     }
 
