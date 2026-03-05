@@ -1,6 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,6 +12,7 @@ namespace JanSharp
     {
         private static Dictionary<System.Type, string[]> colorFieldsByType = new();
         private static Dictionary<System.Type, string[]> spriteFieldsByType = new();
+        private const BindingFlags PrivateAndPublicFlags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public;
 
         static UIStyleProfileContainerUtil()
         {
@@ -162,7 +163,8 @@ namespace JanSharp
 
             foreach (var pair in cached.colorFieldPairs)
             {
-                string colorName = (string)customScriptType.GetField(pair.nameFieldName).GetValue(customScript) ?? "";
+                string colorName = (string)EditorUtil.GetFieldIncludingBase(customScriptType, pair.nameFieldName, PrivateAndPublicFlags)
+                    .GetValue(customScript) ?? "";
                 pair.nameFieldValue = colorName;
                 if (UIStylingEditorUtil.HasLeadingTrailingWhitespace(colorName))
                 {
@@ -188,7 +190,8 @@ namespace JanSharp
 
             foreach (var pair in cached.spriteFieldPairs)
             {
-                string spriteName = (string)customScriptType.GetField(pair.nameFieldName).GetValue(customScript) ?? "";
+                string spriteName = (string)EditorUtil.GetFieldIncludingBase(customScriptType, pair.nameFieldName, PrivateAndPublicFlags)
+                    .GetValue(customScript) ?? "";
                 pair.nameFieldValue = spriteName;
                 if (UIStylingEditorUtil.HasLeadingTrailingWhitespace(spriteName))
                 {
