@@ -66,7 +66,6 @@ namespace JanSharp
         private string errorMsg;
         private SerializedProperty profileNameProp;
         private string[] profileNames = new string[] { };
-        private static HashSet<string> visitedNames = new();
         protected bool IsValid => errorMsg == null;
         private bool controlsFoldedOut = false;
         private int successfulApplicationCount = 0;
