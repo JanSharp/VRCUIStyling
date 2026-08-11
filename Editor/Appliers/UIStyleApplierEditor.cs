@@ -152,7 +152,13 @@ namespace JanSharp
         {
             Rect rect = EditorGUILayout.GetControlRect(hasLabel: true);
             using (new EditorGUI.PropertyScope(rect, label: null, prop))
-                prop.boolValue = EditorGUI.ToggleLeft(rect, new GUIContent(prop.displayName), prop.boolValue);
+            {
+                using var scope = new EditorGUI.ChangeCheckScope();
+                EditorGUI.showMixedValue = prop.hasMultipleDifferentValues;
+                bool newValue = EditorGUI.ToggleLeft(rect, new GUIContent(prop.displayName, prop.tooltip), prop.boolValue);
+                if (scope.changed)
+                    prop.boolValue = newValue;
+            }
         }
 
         private void ApplyStyleForAll()
