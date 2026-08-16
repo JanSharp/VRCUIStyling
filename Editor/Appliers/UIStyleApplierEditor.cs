@@ -44,8 +44,7 @@ namespace JanSharp
             where T : UIStyleApplier
         {
             Component target = (Component)menuCommand.context;
-            T applier = target.gameObject.AddComponent<T>();
-            Undo.RegisterCreatedObjectUndo(applier, $"Add {typeof(T).Name}");
+            T applier = Undo.AddComponent<T>(target.gameObject);
 
             Component[] components = target.gameObject.GetComponents<Component>();
             int targetIndex = System.Array.IndexOf(components, target);
