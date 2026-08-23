@@ -5,15 +5,14 @@ using UnityEngine;
 
 namespace JanSharp
 {
-    [InitializeOnLoad]
-    [DefaultExecutionOrder(-1000)]
     public static class UIStyleRootUtil
     {
         private static Dictionary<System.Type, System.Type> associatedProfileTypeByApplierType = new();
         private static Dictionary<System.Type, System.Type> associatedComponentTypeByApplierType = new();
         private static Dictionary<System.Type, System.Action<ValidationContext, UIStyleApplier, UIStyleProfile, Component>> applyStyleFuncByType = new();
 
-        static UIStyleRootUtil()
+        [OrderedInitializeOnLoad(Order = -1000)]
+        private static void OnAssemblyLoad()
         {
             applyStyleFuncByType.Clear();
         }

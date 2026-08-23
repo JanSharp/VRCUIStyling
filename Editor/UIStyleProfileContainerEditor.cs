@@ -1,20 +1,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using UnityEditor;
 using UnityEngine;
 
 namespace JanSharp
 {
-    [InitializeOnLoad]
-    [DefaultExecutionOrder(-1000)]
     public static class UIStyleProfileContainerUtil
     {
         private static Dictionary<System.Type, string[]> colorFieldsByType = new();
         private static Dictionary<System.Type, string[]> spriteFieldsByType = new();
         private const BindingFlags PrivateAndPublicFlags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public;
 
-        static UIStyleProfileContainerUtil()
+        [OrderedInitializeOnLoad(Order = -1000)]
+        private static void OnAssemblyLoad()
         {
             colorFieldsByType.Clear();
             spriteFieldsByType.Clear();

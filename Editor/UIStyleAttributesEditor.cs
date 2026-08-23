@@ -32,7 +32,6 @@ namespace JanSharp
         }
     }
 
-    [InitializeOnLoad]
     public static class UIStyleCustomColorAndSpriteRefs
     {
         /// <summary>
@@ -44,7 +43,8 @@ namespace JanSharp
         private static List<System.Type> invalidUbTypes = new();
         private const BindingFlags PrivateAndPublicFlags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public;
 
-        static UIStyleCustomColorAndSpriteRefs()
+        [OrderedInitializeOnLoad]
+        private static void OnAssemblyLoad()
         {
             ubTypeCache.Clear();
             ubTypeCacheByType.Clear();
