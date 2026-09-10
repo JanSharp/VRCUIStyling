@@ -70,7 +70,8 @@ namespace JanSharp
         private SerializedProperty profileNameProp;
         private string[] profileNames = new string[] { };
         protected bool IsValid => errorMsg == null;
-        private bool controlsFoldedOut = false;
+        // Each generically typed class type gets its own static field.
+        private static bool controlsFoldedOut = false;
         private int successfulApplicationCount = 0;
         private List<UIStyleRoot> rootsWithValidationErrors;
 
